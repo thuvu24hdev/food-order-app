@@ -1,8 +1,10 @@
 import { useRef, useState } from "react";
+import { User } from "./Cart";
 import classes from "./Checkout.module.css";
 
 interface CheckoutProps {
   onCancel: React.MouseEventHandler;
+  onConfirm: (userData: User) => void;
 }
 
 const isEmpty = (value: string) => value.trim() === "";
@@ -52,6 +54,12 @@ const Checkout = (props: CheckoutProps) => {
     }
 
     // Submit cart data
+    props.onConfirm({
+      name: enteredName,
+      street: enteredStreet,
+      city: enteredCity,
+      postalCode: enteredPostalCode,
+    });
   };
 
   const nameControlClasses = `${classes.control} ${
